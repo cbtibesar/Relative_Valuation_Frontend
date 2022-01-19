@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
-import axiosInstance from '../axios'
+import axiosInstance from '../services/authHeader'
 import { Stack, Paper, Button, IconButton, CircularProgress, Dialog } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid'
 import AddIcon from '@mui/icons-material/Add'

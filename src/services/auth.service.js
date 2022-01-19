@@ -1,23 +1,24 @@
 
-import axiosInstance from '../axios';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from './authHeader';
 
-const baseURL = 'http://127.0.0.1:8000/api/';
+
 
 class AuthService {
-    login(email, password){
+
+
+    login(e, p){
         return axiosInstance
-            .post(`token/`, {
-                email: email,
-                password: password
+            .post('token/', {
+                email: e,
+                password: p
             })
             .then((res) => {
-                if (response.data.accessToken) {
-                    localStorage.setItem('access_token', res.data.access);
-                    localStorage.setItem('refresh_token', res.data.refresh);
-                    axiosInstance.defaults.headers['Authorization'] =
-                        'JWT ' + localStorage.getItem('access_token');
+                if(res.data.access){
+                    localStorage.setItem('access_token', res.data.access)
+                    localStorage.setItem('refresh_token', res.data.refresh)
                 }
-                return response.data
+                return res.data;
             })
     }
 
@@ -26,8 +27,8 @@ class AuthService {
             .post('user/logout/blacklist/', {
                 refresh_token: localStorage.getItem('refresh_token'),
             });
-        localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
+        localStorage.removeItem('access_token');
         axiosInstance.defaults.headers['Authorization'] = null;
     }
 
@@ -37,9 +38,8 @@ class AuthService {
                     email: email,
                     username: username,
                     password: password,
-                })
-            .then(() => {
-                    navigate('/login')
-            });
+            })
     }
 }
+
+export default new AuthService()

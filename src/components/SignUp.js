@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axiosInstance from '../axios'
+import axiosInstance from '../services/authHeader';
 import { useNavigate } from 'react-router-dom'
 
 
@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import AuthService from '../services/auth.service';
 
 
 
@@ -58,17 +59,9 @@ export default function SignUp() {
   const handleSubmit = (e) => {
       e.preventDefault()
       console.log(formData)
-      axiosInstance
-        .post(`user/register/`, {
-				email: formData.email,
-				username: formData.username,
-				password: formData.password,
-			})
-        .then((res) => {
-				navigate('/login')
-				console.log(res)
-				console.log(res.data)
-			});
+      AuthService.register(formData.email, formData.username, formData.password).then(
+        navigate('/login')
+      )
   }
 
 
