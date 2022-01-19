@@ -1,9 +1,8 @@
 import './App.css';
 import { React, useEffect, useState } from 'react';
 import TableList from './components/TablesList';
-import axiosInstance from './axios';
+import axiosInstance from './services/authHeader';
 import DialogueBox from './components/DialogueBox';
-import { Navigate } from 'react-router-dom'
 
 
 const App =()=> {

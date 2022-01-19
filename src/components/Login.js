@@ -8,8 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axiosInstance from '../axios';
+import axiosInstance from '../services/authHeader';
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 
 
 
@@ -52,18 +53,8 @@ export default function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axiosInstance.post(`token/`, {
-            email: formData.email,
-            password: formData.password,
-        })
-        .then((res) => {
-            localStorage.setItem('access_token', res.data.access);
-            localStorage.setItem('refresh_token', res.data.refresh);
-            axiosInstance.defaults.headers['Authorization'] =
-                'JWT ' + localStorage.getItem('access_token');
+        AuthService.login(formData.email, formData.password)
 
-            navigate("/")
-        })
     }
 
     return (
