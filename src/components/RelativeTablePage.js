@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import axiosInstance from '../axios'
 import { Stack, Paper, Button, IconButton, CircularProgress, Dialog } from '@mui/material';
@@ -13,17 +13,17 @@ import {
     GridToolbarExport,
     gridClasses,
 } from '@mui/x-data-grid';
+import { UserContext } from '../UserContext';
 
 
 const RelativeTablePage = () => {
     const [title, setTitle] = useState()
-    // const [newTitle, setNewTitle] = useState()
+    const { user } = useContext(UserContext)
     const [averageData, setAverage] = useState([])
     const [stockName, setStockName] = useState()
     const [selectionModel, setSelectionModel] = useState([]);
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
-    // const [openTitleChange, setOpenTitle] = useState(false)
     const { url } = useParams([])
     const [row, setRow] = useState([])
 
@@ -290,141 +290,107 @@ const RelativeTablePage = () => {
             })
     }
 
-    // const clickEdit =(e)=> {
-    //     e.preventDefault()
-    //     setOpenTitle(true)
-    // }
-
-    // const handleChangeTitle =(e)=> {
-    //     e.preventDefault()
-    //     setNewTitle(e.target.value.trim())
-    // }
-
-    // const handleCloseTitle =()=> {
-    //     setOpenTitle(false)
-    //     setNewTitle('')
-    // }
-
-    // const handleSubmitChangeTitle =(e)=> {
-    //     e.preventDefault()
-    //     if (newTitle !== '') {
-    //         axiosInstance.patch(`stock_api/relative_table/${url}/`, { title: newTitle })
-    //             .then((res) => {
-    //                 setOpenTitle(false)
-    //                 setNewTitle('')
-    //                 setTitle(res.data.title)
-    //                 console.log(res.data)
-    //             }).catch(function (error) {
-    //                 if (error.response) {
-    //                     console.log(error.response)
-    //                 }
-    //             })
-    //     }
-
-    // }
 
 
-
-    return(
-        <div style={{ justifyContent: 'center', display: 'flex', padding: '10px' }}>
-            <Stack spacing={2} sx={{ width: '90%' }}>
-                <Paper elevation={4} sx={{ width: '100%' }}>
-                    <Stack direction='row'>
-                        <Typography sx={{ textAlign: 'left', verticalAlign: 'center', mb: 3, mt: 3, ml: 3 }} variant="h6" component="div">
-                            {title}
-                        </Typography>
-                        <div style={{ width: '85%' }} />
-                        <Stack direction='row' spacing={1} sx={{ padding: 2 }}>
-                            {/* <IconButton onClick={clickEdit}>
-                            <EditIcon/>
-                        </IconButton> */}
-                            {
-                                loading ? <CircularProgress color='success' /> :
-                                    <Button color="success" variant="outlined" startIcon={<AddIcon />} onClick={clickAdd}>
-                                        Add
-                                    </Button>
-                            }
+    if(!user){
+        <Navigate to="/login"/>
+    }
+    else{
+        return(
+            <div style={{ justifyContent: 'center', display: 'flex', padding: '10px' }}>
+                <Stack spacing={2} sx={{ width: '90%' }}>
+                    <Paper elevation={4} sx={{ width: '100%' }}>
+                        <Stack direction='row'>
+                            <Typography sx={{ textAlign: 'left', verticalAlign: 'center', mb: 3, mt: 3, ml: 3 }} variant="h6" component="div">
+                                {title}
+                            </Typography>
+                            <div style={{ width: '85%' }} />
+                            <Stack direction='row' spacing={1} sx={{ padding: 2 }}>
+                                {
+                                    loading ? <CircularProgress color='success' /> :
+                                        <Button color="success" variant="outlined" startIcon={<AddIcon />} onClick={clickAdd}>
+                                            Add
+                                        </Button>
+                                }
+                            </Stack>
                         </Stack>
-                    </Stack>
-                </Paper>
-                {
-                    row.length > 0 ? <Paper elevation={4} sx={{
-                        width: '100%', height: 'flex',
+                    </Paper>
+                    {
+                        row.length > 0 ? <Paper elevation={4} sx={{
+                            width: '100%', height: 'flex',
 
-                        '& .green': {
-                            backgroundColor: 'rgba(0, 128, 0, 0.5)',
-                            color: 'black',
-                            textAlign: 'center',
-                        },
-                        '& .red': {
-                            backgroundColor: 'rgba(255, 0, 0, 0.5)',
-                            color: 'black',
-                            textAlign: 'center',
-                        },
-                    }}>
-                        <DataGrid
-                            rows={row}
-                            columns={columns}
-                            onSelectionModelChange={(newSelectionModel) => {
-                                setSelectionModel(newSelectionModel);
-                            }}
-                            selectionModel={selectionModel}
-                            components={{ Toolbar: CustomToolbar }}
-                            getCellClassName={
-                                (params) => {
-                                    if (params.field === 'forwardPE') {
-                                        return params.value <= averageData.forwardPE / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'priceToBook') {
-                                        return params.value <= averageData.priceToBook / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'priceToSales') {
-                                        return params.value <= averageData.priceToSales / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'enterpriseToRev') {
-                                        return params.value <= averageData.enterpriseToRev / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'enterpriseToEbitda') {
-                                        return params.value <= averageData.enterpriseToEbitda / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'profitMargins') {
-                                        return params.value >= averageData.profitMargins / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'roa') {
-                                        return params.value >= averageData.roa / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'roe') {
-                                        return params.value >= averageData.roe / 1 ? 'green' : 'red'
-                                    } else if (params.field === 'leverage') {
-                                        return params.value >= averageData.leverage / 1 ? 'green' : 'red'
-                                    } else {
-                                        return ''
+                            '& .green': {
+                                backgroundColor: 'rgba(0, 128, 0, 0.5)',
+                                color: 'black',
+                                textAlign: 'center',
+                            },
+                            '& .red': {
+                                backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                                color: 'black',
+                                textAlign: 'center',
+                            },
+                        }}>
+                            <DataGrid
+                                rows={row}
+                                columns={columns}
+                                onSelectionModelChange={(newSelectionModel) => {
+                                    setSelectionModel(newSelectionModel);
+                                }}
+                                selectionModel={selectionModel}
+                                components={{ Toolbar: CustomToolbar }}
+                                getCellClassName={
+                                    (params) => {
+                                        if (params.field === 'forwardPE') {
+                                            return params.value <= averageData.forwardPE / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'priceToBook') {
+                                            return params.value <= averageData.priceToBook / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'priceToSales') {
+                                            return params.value <= averageData.priceToSales / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'enterpriseToRev') {
+                                            return params.value <= averageData.enterpriseToRev / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'enterpriseToEbitda') {
+                                            return params.value <= averageData.enterpriseToEbitda / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'profitMargins') {
+                                            return params.value >= averageData.profitMargins / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'roa') {
+                                            return params.value >= averageData.roa / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'roe') {
+                                            return params.value >= averageData.roe / 1 ? 'green' : 'red'
+                                        } else if (params.field === 'leverage') {
+                                            return params.value >= averageData.leverage / 1 ? 'green' : 'red'
+                                        } else {
+                                            return ''
+                                        }
                                     }
                                 }
-                            }
-                            pageSize={15}
-                            rowHeight={40}
-                            rowsPerPageOptions={[15]}
-                            checkboxSelection
-                            disableSelectionOnClick
-                            autoHeight
-                            sx={{ height: "100%" }}
-                        />
-                    </Paper> :
-                        <Typography variant='h6' textAlign='center'>
-                            Add company to get started!
-                        </Typography>
-                }
+                                pageSize={15}
+                                rowHeight={40}
+                                rowsPerPageOptions={[15]}
+                                checkboxSelection
+                                disableSelectionOnClick
+                                autoHeight
+                                sx={{ height: "100%" }}
+                            />
+                        </Paper> :
+                            <Typography variant='h6' textAlign='center'>
+                                Add company to get started!
+                            </Typography>
+                    }
 
 
-                <div style={{ width: '10%' }}>
-                    <Fade in={selectionModel.length > 0}>
-                        <Button color='error' variant='contained' startIcon={<DeleteIcon />} onClick={onRemove}>
-                            Remove
-                        </Button>
-                    </Fade>
-                </div>
-            </Stack>
-            <DialogueBox open={open} handleClose={handleClose} handleChange={handleChange} label={"Add stock (by ticker):"} onAdd={onAdd} />
+                    <div style={{ width: '10%' }}>
+                        <Fade in={selectionModel.length > 0}>
+                            <Button color='error' variant='contained' startIcon={<DeleteIcon />} onClick={onRemove}>
+                                Remove
+                            </Button>
+                        </Fade>
+                    </div>
+                </Stack>
+                <DialogueBox open={open} handleClose={handleClose} handleChange={handleChange} label={"Add stock (by ticker):"} onAdd={onAdd} />
+            </div>
+        );
+    }
 
 
-            {/* <DialogueBox open={openTitleChange} handleClose={handleCloseTitle} handleChange={handleChangeTitle} label={"Relative Table Title"} onAdd={handleSubmitChangeTitle}/> */}
-        </div>
-
-
-    );
 }
 export default RelativeTablePage

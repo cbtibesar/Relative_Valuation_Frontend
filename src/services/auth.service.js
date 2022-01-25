@@ -1,9 +1,14 @@
 
+import { useContext } from 'react';
 import axiosInstance from '../axios';
+import { UserContext } from '../UserContext';
 
 const baseURL = 'http://127.0.0.1:8000/api/';
 
+const { setUser } = useContext(UserContext)
+
 class AuthService {
+
     login(email, password){
         return axiosInstance
             .post(`token/`, {
@@ -17,6 +22,7 @@ class AuthService {
                     axiosInstance.defaults.headers['Authorization'] =
                         'JWT ' + localStorage.getItem('access_token');
                 }
+                setUser(res.data.accessToken)
                 return response.data
             })
     }
@@ -29,6 +35,7 @@ class AuthService {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         axiosInstance.defaults.headers['Authorization'] = null;
+        setUser(null)
     }
 
     register(username, email, password){
