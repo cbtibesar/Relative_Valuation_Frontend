@@ -9,22 +9,20 @@ const { setUser } = useContext(UserContext)
 
 class AuthService {
 
-    login(email, password){
-        return axiosInstance
+    async login(email, password){
+        const res = await axiosInstance
             .post(`token/`, {
                 email: email,
                 password: password
-            })
-            .then((res) => {
-                if (response.data.accessToken) {
-                    localStorage.setItem('access_token', res.data.access);
-                    localStorage.setItem('refresh_token', res.data.refresh);
-                    axiosInstance.defaults.headers['Authorization'] =
-                        'JWT ' + localStorage.getItem('access_token');
-                }
-                setUser(res.data.accessToken)
-                return response.data
-            })
+            });
+        if (response.data.accessToken) {
+            localStorage.setItem('access_token', res.data.access);
+            localStorage.setItem('refresh_token', res.data.refresh);
+            axiosInstance.defaults.headers['Authorization'] =
+                'JWT ' + localStorage.getItem('access_token');
+        }
+        setUser(res.data.accessToken);
+        return response.data;
     }
 
     logout(){
@@ -38,15 +36,13 @@ class AuthService {
         setUser(null)
     }
 
-    register(username, email, password){
-        return axiosInstance
+    async register(username, email, password){
+        await axiosInstance
             .post(`user/register/`, {
-                    email: email,
-                    username: username,
-                    password: password,
-                })
-            .then(() => {
-                    navigate('/login')
+                email: email,
+                username: username,
+                password: password,
             });
+        navigate('/login');
     }
 }

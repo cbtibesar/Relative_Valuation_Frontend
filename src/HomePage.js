@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom'
 import { UserContext } from './UserContext';
 
 
-const App =()=> {
+const HomePage =()=> {
   const [tables, setTables] = useState([])
   const [open, setOpen] = useState(false)
   const [tableName, setTableName] = useState();
@@ -73,4 +73,4 @@ const App =()=> {
 
 }
 
-export default App
+export default HomePage
