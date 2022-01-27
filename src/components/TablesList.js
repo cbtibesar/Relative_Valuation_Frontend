@@ -8,7 +8,6 @@ import { Stack,Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { Navigate, useNavigate } from 'react-router-dom';
 import ListHeader from './ListHeader';
-import { UserContext } from '../UserContext';
 
 const TableList = ({ tables, onDelete, clickAdd }) => {
 

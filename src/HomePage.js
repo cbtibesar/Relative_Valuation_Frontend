@@ -3,14 +3,12 @@ import TableList from './components/TablesList';
 import axiosInstance from './axios';
 import DialogueBox from './components/DialogueBox';
 import { Navigate } from 'react-router-dom'
-import { UserContext } from './UserContext';
 
 
 const HomePage =()=> {
   const [tables, setTables] = useState([])
   const [open, setOpen] = useState(false)
   const [tableName, setTableName] = useState();
-  const user = useContext(UserContext)
 
   const onDelete =(table)=> {
     axiosInstance.delete(`stock_api/relative_table/${table.url}/`)
@@ -49,15 +47,10 @@ const HomePage =()=> {
   }
 
   useEffect(() => {
-    if(!user){
-      Navigate('/login')
-    }
-    else{
-      axiosInstance.get("stock_api/relative_table/")
-     .then((res) => {
-      setTables(res.data)
-    }).catch(error => console.error(`Error:${error}`))
-    }
+    axiosInstance.get("stock_api/relative_table/")
+      .then((res) => {
+        setTables(res.data)
+      }).catch(error => console.error(`Error:${error}`))
 
   },[])
 
