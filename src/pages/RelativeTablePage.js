@@ -5,7 +5,7 @@ import { Stack, Paper, Button, IconButton, CircularProgress, Dialog } from '@mui
 import { DataGrid } from '@mui/x-data-grid'
 import AddIcon from '@mui/icons-material/Add'
 import { Typography } from '@mui/material';
-import DialogueBox from './DialogueBox';
+import DialogueBox from '../components/DialogueBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Fade } from '@mui/material';
 import {
