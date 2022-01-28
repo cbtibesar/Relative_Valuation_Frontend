@@ -13,7 +13,7 @@ import {
     GridToolbarExport,
     gridClasses,
 } from '@mui/x-data-grid';
-import { minWidth } from '@mui/system';
+import AverageTable from '../components/averageTable';
 
 
 const RelativeTablePage = () => {
@@ -149,9 +149,22 @@ const RelativeTablePage = () => {
     const displayData = (stock, i) => {
         return (
             {
-                id: i, ticker: stock.ticker, companyName: stock.company_name, sector: stock.sector, currentPrice: `$${stock.current_price}`, marketCap: `$${(stock.market_cap / billion).toFixed(2)}`, enterpriseValue: `$${(stock.enterprise_value / billion).toFixed(2)}`,
-                forwardPE: (stock.forward_pe / 1).toFixed(2), priceToBook: (stock.price_to_book / 1).toFixed(2), priceToSales: (stock.price_to_sales / 1).toFixed(2), enterpriseToRev: (stock.enterprise_to_rev / 1).toFixed(2), enterpriseToEbitda: (stock.enterprise_to_ebitda / 1).toFixed(2),
-                profitMargins: (stock.profit_margins / 1).toFixed(2), roa: (stock.roa / 1).toFixed(2), roe: (stock.roe / 1).toFixed(2), leverage: (stock.leverage / 1).toFixed(2), beta: (stock.beta / 1).toFixed(2)
+                id: i,
+                ticker: stock.ticker === NULL_FIELD_MAGIC_NUMBER ? "N/A" : stock.ticker,
+                companyName: stock.company_name,
+                sector: stock.sector,
+                currentPrice: stock.current_price === NULL_FIELD_MAGIC_NUMBER ? "N/A" : `$${stock.current_price}`,
+                marketCap: stock.market_cap === NULL_FIELD_MAGIC_NUMBER ? "N/A" : `$${(stock.market_cap / billion).toFixed(2)}`,
+                enterpriseValue: stock.enterprise_value === NULL_FIELD_MAGIC_NUMBER ? "N/A" : `$${(stock.enterprise_value / billion).toFixed(2)}`,
+                forwardPE: stock.forward_pe === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.forward_pe / 1).toFixed(2),
+                priceToBook: stock.price_to_book === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.price_to_book / 1).toFixed(2),
+                priceToSales: stock.price_to_sales === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.price_to_sales / 1).toFixed(2),
+                enterpriseToRev: stock.enterprise_to_rev === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.enterprise_to_rev / 1).toFixed(2),
+                enterpriseToEbitda: stock.enterprise_to_ebitda === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.enterprise_to_ebitda / 1).toFixed(2),
+                profitMargins: stock.profit_margins === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.profit_margins / 1).toFixed(2),
+                roa: stock.roa === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.roa / 1).toFixed(2), roe: (stock.roe / 1).toFixed(2),
+                leverage: stock.leverage === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.leverage / 1).toFixed(2),
+                beta: stock.beta === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.beta / 1).toFixed(2)
 
             }
         )
@@ -292,41 +305,6 @@ const RelativeTablePage = () => {
             })
     }
 
-    // const clickEdit =(e)=> {
-    //     e.preventDefault()
-    //     setOpenTitle(true)
-    // }
-
-    // const handleChangeTitle =(e)=> {
-    //     e.preventDefault()
-    //     setNewTitle(e.target.value.trim())
-    // }
-
-    // const handleCloseTitle =()=> {
-    //     setOpenTitle(false)
-    //     setNewTitle('')
-    // }
-
-    // const handleSubmitChangeTitle =(e)=> {
-    //     e.preventDefault()
-    //     if (newTitle !== '') {
-    //         axiosInstance.patch(`stock_api/relative_table/${url}/`, { title: newTitle })
-    //             .then((res) => {
-    //                 setOpenTitle(false)
-    //                 setNewTitle('')
-    //                 setTitle(res.data.title)
-    //                 console.log(res.data)
-    //             }).catch(function (error) {
-    //                 if (error.response) {
-    //                     console.log(error.response)
-    //                 }
-    //             })
-    //     }
-
-    // }
-
-
-
     return(
         <div style={{ justifyContent: 'center', display: 'flex', padding: '10px' }}>
             <Stack spacing={2} sx={{ width: '90%' }}>
@@ -401,9 +379,9 @@ const RelativeTablePage = () => {
                             sx={{ height: "100%" }}
                         />
                     </Paper> :
-                        <Typography variant='h6' textAlign='center'>
-                            Add company to get started!
-                        </Typography>
+                    <Typography variant='h6' textAlign='center'>
+                        Add company to get started!
+                    </Typography>
                 }
 
 
@@ -414,8 +392,10 @@ const RelativeTablePage = () => {
                         </Button>
                     </Fade>
                 </div>
+                <AverageTable averageData={averageData} />
             </Stack>
             <DialogueBox open={open} handleClose={handleClose} handleChange={handleChange} label={"Add stock (by ticker):"} onAdd={onAdd} />
+
 
 
             {/* <DialogueBox open={openTitleChange} handleClose={handleCloseTitle} handleChange={handleChangeTitle} label={"Relative Table Title"} onAdd={handleSubmitChangeTitle}/> */}
