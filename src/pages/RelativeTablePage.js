@@ -13,13 +13,14 @@ import {
     GridToolbarExport,
     gridClasses,
 } from '@mui/x-data-grid';
+import { minWidth } from '@mui/system';
 
 
 const RelativeTablePage = () => {
     const [title, setTitle] = useState()
     // const [newTitle, setNewTitle] = useState()
     const [averageData, setAverage] = useState([])
-    const [stockName, setStockName] = useState()
+    const [stockName, setStockName] = useState('')
     const [selectionModel, setSelectionModel] = useState([]);
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -265,6 +266,7 @@ const RelativeTablePage = () => {
                     if (error.response) {
                         console.log(error.response)
                     }
+                    setLoading(false)
                 })
         }
     }
@@ -328,23 +330,18 @@ const RelativeTablePage = () => {
     return(
         <div style={{ justifyContent: 'center', display: 'flex', padding: '10px' }}>
             <Stack spacing={2} sx={{ width: '90%' }}>
-                <Paper elevation={4} sx={{ width: '100%' }}>
+                <Paper elevation={4} sx={{ width: '100%', minHeight:'80px' }}>
                     <Stack direction='row'>
-                        <Typography sx={{ textAlign: 'left', verticalAlign: 'center', mb: 3, mt: 3, ml: 3 }} variant="h6" component="div">
+                        <Typography sx={{ textAlign: 'left', verticalAlign: 'center', mb: 3, mt: 3, ml: 3, minWidth:'25%'}} variant="h6" component="div">
                             {title}
                         </Typography>
                         <div style={{ width: '85%' }} />
-                        <Stack direction='row' spacing={1} sx={{ padding: 2 }}>
-                            {/* <IconButton onClick={clickEdit}>
-                            <EditIcon/>
-                        </IconButton> */}
-                            {
-                                loading ? <CircularProgress color='success' /> :
-                                    <Button color="success" variant="outlined" startIcon={<AddIcon />} onClick={clickAdd}>
-                                        Add
-                                    </Button>
-                            }
-                        </Stack>
+                        {
+                            loading ? <CircularProgress color='success' sx={{ height: '50%', verticalAlign: 'center', mb: 3, mt: 3, mr: 3 }} /> :
+                                <Button sx={{ height: '50%', mb: 3, mt: 3, mr:3 }} color="success" variant="outlined" startIcon={<AddIcon />} onClick={clickAdd}>
+                                    Add
+                                </Button>
+                        }
                     </Stack>
                 </Paper>
                 {

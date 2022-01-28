@@ -7,7 +7,7 @@ import DialogueBox from '../components/DialogueBox';
 const HomePage =()=> {
   const [tables, setTables] = useState([])
   const [open, setOpen] = useState(false)
-  const [tableName, setTableName] = useState();
+  const [tableName, setTableName] = useState('');
 
   const onDelete =(table)=> {
     axiosInstance.delete(`stock_api/relative_table/${table.url}/`)
