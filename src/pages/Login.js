@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import useAuth from '../services/useAuth.js'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,9 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axiosInstance from '../services/authHeader';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../services/auth.service';
 
 
 
@@ -34,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignIn() {
-    const classes = useStyles();
+const Login = () => {
+    const classes = useStyles()
     const navigate = useNavigate()
+    const { login } = useAuth()
 
     const [formData, setFormData] = useState(Object.freeze({
         email:"",
@@ -53,7 +53,9 @@ export default function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        AuthService.login(formData.email, formData.password)
+        login(formData.email, formData.password).then(() => {
+            navigate('/')
+        })
 
     }
 
@@ -112,3 +114,5 @@ export default function SignIn() {
         </Container>
     );
 }
+
+export default Login

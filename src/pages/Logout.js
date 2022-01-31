@@ -1,15 +1,16 @@
 
 import React, { useEffect } from 'react';
-import AuthService from '../services/auth.service';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+import useAuth from '../services/useAuth.js'
 
 export default function Logout() {
     const navigate = useNavigate()
+    const { logout } = useAuth()
 
     useEffect(() => {
-        AuthService.logout()
+        logout()
         navigate('/login')
-    });
+    }, [])
 
     return <div></div>;
 }

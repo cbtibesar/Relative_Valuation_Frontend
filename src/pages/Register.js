@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import axiosInstance from '../services/authHeader';
 import { useNavigate } from 'react-router-dom'
-
+import useAuth from '../services/useAuth.js'
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,7 +12,6 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import AuthService from '../services/auth.service';
 
 
 
@@ -39,29 +37,31 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function SignUp() {
+const Register = () => {
   const navigate = useNavigate()
+  const { register } = useAuth()
+
   const initialFormData = Object.freeze({
-      email:'',
-      username:'',
-      password:''
+    email: '',
+    username: '',
+    password: ''
   })
   const [formData, updateFormData] = useState(initialFormData)
 
-  const handleChange = (e) =>{
-      e.preventDefault()
-      updateFormData({
-          ...formData,
-          [e.target.name]: e.target.value.trim(),
-      })
+  const handleChange = (e) => {
+    e.preventDefault()
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    })
   }
 
   const handleSubmit = (e) => {
-      e.preventDefault()
-      console.log(formData)
-      AuthService.register(formData.email, formData.username, formData.password).then(
-        navigate('/login')
-      )
+    e.preventDefault()
+    console.log(formData)
+    register(formData.email, formData.username, formData.password).then(
+      navigate('/login')
+    )
   }
 
 
@@ -139,5 +139,7 @@ export default function SignUp() {
       <Box mt={5}>
       </Box>
     </Container>
+  )
+}
 
-  )};
+export default Register

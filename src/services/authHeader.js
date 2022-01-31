@@ -1,15 +1,14 @@
 import axios from 'axios';
 
+
 const baseURL = 'http://127.0.0.1:8000/api/';
-
-
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
-    timeout: 5000,
+    timeout: 10000,
     headers: {
         Authorization: localStorage.getItem('access_token') ?
-        "JWT " + localStorage.getItem('access_token') : null,
+            "JWT " + localStorage.getItem('access_token') : null,
         'Content-Type': 'application/json',
         accept: 'application/json',
     },
@@ -72,11 +71,17 @@ axiosInstance.interceptors.response.use(
                         });
                 } else {
                     console.log('Refresh token is expired', tokenParts.exp, now);
-                    window.location.href = '/login/';
+                   //window.location.href = '/login/'
+                    localStorage.removeItem('refresh_token');
+                    localStorage.removeItem('access_token');
+                    axiosInstance.defaults.headers['Authorization'] = null;
                 }
             } else {
                 console.log('Refresh token not available.');
-                window.location.href = '/login/';
+                //window.location.href = '/login/';
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('access_token');
+                axiosInstance.defaults.headers['Authorization'] = null;
             }
         }
 
