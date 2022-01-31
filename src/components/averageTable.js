@@ -65,6 +65,8 @@ const AverageTable =({ averageData })=> {
 
     ]
 
+    
+
     return(
         <DataGrid
             columns={columns}

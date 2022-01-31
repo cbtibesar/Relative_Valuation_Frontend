@@ -114,12 +114,13 @@ const RelativeTablePage = () => {
 
     const onAdd = (e) => {
         e.preventDefault()
-        setOpen(false)
         setStockName('')
-        setLoading(true)
         if (stockName !== '') {
+            setLoading(true)
+            setOpen(false)
             axiosInstance.patch(`stock_api/relative_table/${url}/`, {stocks:[stockName]})
                 .then((res) => {
+                    setStockName('')
                     setStockData(res.data.stocks)
                     updateAverageData(res.data.stocks)
                     setLoading(false)
