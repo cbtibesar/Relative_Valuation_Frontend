@@ -35,13 +35,14 @@ function useAuth() {
             setUser(false)
         },
 
-        register(username, email, password) {
-            return axiosInstance
+        async register(email, username, password) {
+            const res = await axiosInstance
                 .post(`user/register/`, {
                     email: email,
                     username: username,
-                    password: password,
+                    password: password
                 })
+            return res.data
         }
 
     };
