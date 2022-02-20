@@ -1,12 +1,15 @@
 import {createContext, useContext, React, useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import axiosInstance from './authHeader'
 
 const authContext = createContext()
+
 
 function useAuth() {
     const [user, setUser] = useState(()=>(
         localStorage.getItem('access_token') ? true : false
     ))
+    const navigate = useNavigate()
 
     return {
         user,
@@ -41,8 +44,9 @@ function useAuth() {
                     email: email,
                     username: username,
                     password: password
+                }).then(() => {
+                    navigate('/login')
                 })
-            return res.data
         }
 
     };
