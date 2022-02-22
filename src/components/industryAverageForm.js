@@ -102,7 +102,7 @@ const IndustryAverageForm =({ setAverageData })=> {
                             <TextField
                                 id="profit_margins"
                                 name="profit_margins"
-                                label="Profit Margins"
+                                label="Margins"
                                 fullWidth
                                 variant="standard"
                                 onChange={handleChange} />

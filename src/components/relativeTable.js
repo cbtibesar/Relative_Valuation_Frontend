@@ -30,9 +30,9 @@ export function displayData(stock, i) {
             priceToSales: stock.price_to_sales === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.price_to_sales / 1).toFixed(2),
             enterpriseToRev: stock.enterprise_to_rev === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.enterprise_to_rev / 1).toFixed(2),
             enterpriseToEbitda: stock.enterprise_to_ebitda === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.enterprise_to_ebitda / 1).toFixed(2),
-            profitMargins: stock.profit_margins === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.profit_margins / 1).toFixed(2),
-            roa: stock.roa === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.roa / 1).toFixed(2),
-            roe: stock.roa === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.roe / 1).toFixed(2),
+            profitMargins: stock.profit_margins === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.profit_margins / .01).toFixed(2),
+            roa: stock.roa === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.roa / .01).toFixed(2),
+            roe: stock.roa === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.roe / .01).toFixed(2),
             leverage: stock.leverage === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.leverage / 1).toFixed(2),
             beta: stock.beta === NULL_FIELD_MAGIC_NUMBER ? "N/A" : (stock.beta / 1).toFixed(2)
 

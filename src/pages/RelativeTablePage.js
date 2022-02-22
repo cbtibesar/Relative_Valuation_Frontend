@@ -138,7 +138,7 @@ const RelativeTablePage = () => {
     return(
         <div style={{ justifyContent: 'center', display: 'flex', padding: '10px' }}>
             <Grid container spacing={3}>
-                <Grid item xs={9}>
+                <Grid item xs={10}>
                     <Stack spacing={2}>
                         <Paper elevation={4} sx={{ width: '100%', minHeight: '80px' }}>
                             <Stack direction='row'>
@@ -161,7 +161,7 @@ const RelativeTablePage = () => {
                         }
                     </Stack>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <IndustryAverageForm />
                 </Grid>
 
