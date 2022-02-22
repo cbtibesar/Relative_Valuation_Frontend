@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import { Fade  } from '@mui/material';
 import { Stack } from '@mui/material';
 
-const IndustryAverageForm =({ setAverageData })=> {
+const IndustryAverageForm =({ averageData, setAverageData })=> {
 
     const [formData, setFormData] = useState(Object.freeze({
         industry: "",
@@ -32,7 +32,7 @@ const IndustryAverageForm =({ setAverageData })=> {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
+        setAverageData(...averageData, formData)
     }
 
     return(
@@ -102,7 +102,7 @@ const IndustryAverageForm =({ setAverageData })=> {
                             <TextField
                                 id="profit_margins"
                                 name="profit_margins"
-                                label="Profit Margins"
+                                label="Margins"
                                 fullWidth
                                 variant="standard"
                                 onChange={handleChange} />
