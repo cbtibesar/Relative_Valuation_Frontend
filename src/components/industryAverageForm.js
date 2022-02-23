@@ -59,7 +59,7 @@ const IndustryAverageForm =({ averageData, setAverageData })=> {
                         <Grid item xs={6}>
                             <TextField
                                 id="forwardPE"
-                                name="pe"
+                                name="forwardPE"
                                 label="Price/Earnings"
                                 fullWidth
                                 variant="standard"
@@ -68,7 +68,7 @@ const IndustryAverageForm =({ averageData, setAverageData })=> {
                         <Grid item xs={6}>
                             <TextField
                                 id="priceToSales"
-                                name="ps"
+                                name="priceToSales"
                                 label="Price/Sales"
                                 fullWidth
                                 variant="standard"
@@ -94,8 +94,8 @@ const IndustryAverageForm =({ averageData, setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="enterpriseToEBITDA"
-                                name="enterpriseToEBITDA"
+                                id="enterpriseToEbitda"
+                                name="enterpriseToEbitda"
                                 label="EV/EBITDA"
                                 fullWidth
                                 variant="standard"

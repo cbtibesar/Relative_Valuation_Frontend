@@ -189,10 +189,7 @@ const RelativeTable =({ stockData, averageData, updateAverageData, setStockData}
                 }
             })
     }
-
-
-
-
+    
     return(
         <React.Fragment>
             {

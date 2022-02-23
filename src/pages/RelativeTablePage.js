@@ -154,10 +154,12 @@ const RelativeTablePage = () => {
                                 }
                             </Stack>
                         </Paper>
-                        <RelativeTable stockData={stockData} averageData={averageData[0]} updateAverageData={updateAverageData} setStockData={setStockData} />
-
                         {
-                            averageData ? <AverageTable averageData={averageData} /> : <></>
+                            averageData ?
+                            <>
+                                <RelativeTable stockData={stockData} averageData={averageData[0]} updateAverageData={updateAverageData} setStockData={setStockData} />
+                                <AverageTable averageData={averageData} />
+                            </>:<></>
                         }
                     </Stack>
                 </Grid>

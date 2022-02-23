@@ -1,4 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid"
+import { Paper } from '@material-ui/core'
 import React from "react"
 
 const AverageTable =({ averageData })=> {
@@ -65,16 +66,18 @@ const AverageTable =({ averageData })=> {
 
     ]
 
-    
+
 
     return(
-        <DataGrid
-            columns={columns}
-            rows={averageData}
-            pageSize={15}
-            rowHeight={40}
-            autoHeight
-        />
+        <Paper elevation={4}>
+            <DataGrid
+                columns={columns}
+                rows={averageData}
+                pageSize={15}
+                rowHeight={40}
+                autoHeight
+            />
+        </Paper>
     )
 }
 
