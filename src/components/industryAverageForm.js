@@ -4,20 +4,22 @@ import { useState } from 'react'
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { Button } from '@mui/material';
-import { Fade  } from '@mui/material';
+import { Fade } from '@mui/material';
 import { Stack } from '@mui/material';
 
-const IndustryAverageForm =({ setAverageData })=> {
+const IndustryAverageForm = ({ averageData, setAverageData }) => {
 
+    let id = 1
     const [formData, setFormData] = useState(Object.freeze({
+        id: id,
         industry: "",
-        pe: "",
-        ps: "",
-        pb: "",
-        ev_rev: "",
-        ev_ebitda: "",
-        profit_margins: "",
-        asset_turnover: "",
+        forwardPE: "",
+        priceToBook: "",
+        priceToSales: "",
+        enterpriseToRev: "",
+        enterpriseToEbitda: "",
+        profitMargins: "",
+        leverage: "",
         roe: "",
         roa: ""
     }))
@@ -32,10 +34,11 @@ const IndustryAverageForm =({ setAverageData })=> {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
+        setAverageData([...averageData, formData])
+        id += 1
     }
 
-    return(
+    return (
         <React.Fragment>
             <Stack spacing={2}>
                 <Paper elevation={4}>
@@ -55,8 +58,8 @@ const IndustryAverageForm =({ setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="pe"
-                                name="pe"
+                                id="forwardPE"
+                                name="forwardPE"
                                 label="Price/Earnings"
                                 fullWidth
                                 variant="standard"
@@ -64,8 +67,8 @@ const IndustryAverageForm =({ setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="ps"
-                                name="ps"
+                                id="priceToSales"
+                                name="priceToSales"
                                 label="Price/Sales"
                                 fullWidth
                                 variant="standard"
@@ -73,8 +76,8 @@ const IndustryAverageForm =({ setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="pb"
-                                name="pb"
+                                id="priceToBook"
+                                name="priceToBook"
                                 label="Price/Book"
                                 fullWidth
                                 variant="standard"
@@ -82,8 +85,8 @@ const IndustryAverageForm =({ setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="ev_rev"
-                                name="ev_rev"
+                                id="enterpriseToRev"
+                                name="enterpriseToRev"
                                 label="EV/Rev"
                                 fullWidth
                                 variant="standard"
@@ -91,8 +94,8 @@ const IndustryAverageForm =({ setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="ev_ebitda"
-                                name="ev_ebitda"
+                                id="enterpriseToEbitda"
+                                name="enterpriseToEbitda"
                                 label="EV/EBITDA"
                                 fullWidth
                                 variant="standard"
@@ -100,8 +103,8 @@ const IndustryAverageForm =({ setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="profit_margins"
-                                name="profit_margins"
+                                id="profitMargins"
+                                name="profitMargins"
                                 label="Margins"
                                 fullWidth
                                 variant="standard"
@@ -109,9 +112,9 @@ const IndustryAverageForm =({ setAverageData })=> {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
-                                id="asset_turnover"
-                                name="asset_turnover"
-                                label="Asset Turn"
+                                id="leverage"
+                                name="leverage"
+                                label="Leverage"
                                 fullWidth
                                 variant="standard"
                                 onChange={handleChange} />
