@@ -32,39 +32,39 @@ const RelativeTablePage = () => {
             for (let i = 0; i < stocks.length; i++) {
                 const stock = displayData(stocks[i], i)
                 if (stock.forwardPE !== "N/A") {
-                    totalPE += stock.forwardPE/1
+                    totalPE += stock.forwardPE / 1
                     numPE += 1
                 }
                 if (stock.enterpriseToRev !== "N/A") {
-                    totalEtR += stock.enterpriseToRev/1
+                    totalEtR += stock.enterpriseToRev / 1
                     numEtR += 1
                 }
                 if (stock.enterpriseToEbitda !== "N/A") {
-                    totalEtE += stock.enterpriseToEbitda/1
+                    totalEtE += stock.enterpriseToEbitda / 1
                     numEtE += 1
                 }
                 if (stock.profitMargins !== "N/A") {
-                    totalPM += stock.profitMargins/1
+                    totalPM += stock.profitMargins / 1
                     numPM += 1
                 }
                 if (stock.roe !== "N/A") {
-                    totalROE += stock.roe/1
+                    totalROE += stock.roe / 1
                     numROE += 1
                 }
                 if (stock.roa !== "N/A") {
-                    totalROA += stock.roa/1
+                    totalROA += stock.roa / 1
                     numROA += 1
                 }
                 if (stock.leverage !== "N/A") {
-                    totalLeverage += stock.leverage/1
+                    totalLeverage += stock.leverage / 1
                     numLeverage += 1
                 }
                 if (stock.priceToBook !== "N/A") {
-                    totalPB += stock.priceToBook/1
+                    totalPB += stock.priceToBook / 1
                     numPB += 1
                 }
                 if (stock.priceToSales !== "N/A") {
-                    totalPS += stock.priceToSales/1
+                    totalPS += stock.priceToSales / 1
                     numPS += 1
                 }
 
@@ -89,14 +89,14 @@ const RelativeTablePage = () => {
 
     useEffect(() => {
         axiosInstance.get(`stock_api/relative_table/${url}/`)
-        .then((res) => {
-            setStockData(res.data.stocks)
-            updateAverageData(res.data.stocks)
-            setTitle(res.data.title)
-        })
+            .then((res) => {
+                setStockData(res.data.stocks)
+                updateAverageData(res.data.stocks)
+                setTitle(res.data.title)
+            })
     }, [])
 
-    const clickAdd =(e)=> {
+    const clickAdd = (e) => {
         e.preventDefault()
         setOpen(true)
     }
@@ -118,7 +118,7 @@ const RelativeTablePage = () => {
         if (stockName !== '') {
             setLoading(true)
             setOpen(false)
-            axiosInstance.patch(`stock_api/relative_table/${url}/`, {stocks:[stockName]})
+            axiosInstance.patch(`stock_api/relative_table/${url}/`, { stocks: [stockName] })
                 .then((res) => {
                     setStockName('')
                     setStockData(res.data.stocks)
@@ -135,7 +135,7 @@ const RelativeTablePage = () => {
 
 
 
-    return(
+    return (
         <div style={{ justifyContent: 'center', display: 'flex', padding: '10px' }}>
             <Grid container spacing={3}>
                 <Grid item xs={10}>
@@ -160,6 +160,7 @@ const RelativeTablePage = () => {
                                 <RelativeTable stockData={stockData} averageData={averageData[0]} updateAverageData={updateAverageData} setStockData={setStockData} />
                                 <AverageTable averageData={averageData} />
                             </>:<></>
+
                         }
                     </Stack>
                 </Grid>

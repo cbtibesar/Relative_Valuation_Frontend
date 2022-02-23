@@ -4,11 +4,10 @@ import { useState } from 'react'
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { Button } from '@mui/material';
-import { Fade  } from '@mui/material';
+import { Fade } from '@mui/material';
 import { Stack } from '@mui/material';
 
 const IndustryAverageForm =({ averageData, setAverageData })=> {
-
     let id = 1
     const [formData, setFormData] = useState(Object.freeze({
         id: id,
@@ -38,7 +37,7 @@ const IndustryAverageForm =({ averageData, setAverageData })=> {
         id += 1
     }
 
-    return(
+    return (
         <React.Fragment>
             <Stack spacing={2}>
                 <Paper elevation={4}>

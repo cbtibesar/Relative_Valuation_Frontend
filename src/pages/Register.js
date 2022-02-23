@@ -59,9 +59,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(formData)
-    register(formData.email, formData.username, formData.password).then(
-      navigate('/login')
-    )
+    register(formData.email, formData.username, formData.password)
   }
 
 
