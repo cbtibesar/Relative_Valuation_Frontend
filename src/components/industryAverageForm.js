@@ -7,8 +7,7 @@ import { Button } from '@mui/material';
 import { Fade } from '@mui/material';
 import { Stack } from '@mui/material';
 
-const IndustryAverageForm = ({ averageData, setAverageData }) => {
-
+const IndustryAverageForm =({ averageData, setAverageData })=> {
     let id = 1
     const [formData, setFormData] = useState(Object.freeze({
         id: id,

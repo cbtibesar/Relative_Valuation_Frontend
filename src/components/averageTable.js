@@ -65,10 +65,8 @@ const AverageTable = ({ averageData }) => {
         },
 
     ]
-
-
-
-    return (
+    
+    return(
         <Paper elevation={4}>
             <DataGrid
                 columns={columns}

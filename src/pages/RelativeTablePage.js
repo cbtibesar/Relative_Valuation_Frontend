@@ -70,7 +70,7 @@ const RelativeTablePage = () => {
 
             }
             setAverage([{
-                id: 0,
+                id:0,
                 industry: 'Table Averages',
                 forwardPE: (totalPE / numPE),
                 enterpriseToRev: (totalEtR / numEtR),
@@ -156,10 +156,11 @@ const RelativeTablePage = () => {
                         </Paper>
                         {
                             averageData ?
-                                <>
-                                    <RelativeTable stockData={stockData} averageData={averageData[0]} updateAverageData={updateAverageData} setStockData={setStockData} />
-                                    <AverageTable averageData={averageData} />
-                                </> : <></>
+                            <>
+                                <RelativeTable stockData={stockData} averageData={averageData[0]} updateAverageData={updateAverageData} setStockData={setStockData} />
+                                <AverageTable averageData={averageData} />
+                            </>:<></>
+
                         }
                     </Stack>
                 </Grid>
