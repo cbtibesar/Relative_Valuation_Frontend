@@ -69,7 +69,7 @@ const RelativeTablePage = () => {
                 }
 
             }
-            setAverage({
+            setAverage([{
                 id:0,
                 industry: 'Table Averages',
                 forwardPE: (totalPE / numPE),
@@ -81,8 +81,8 @@ const RelativeTablePage = () => {
                 roa: (totalROA / numROA),
                 priceToBook: (totalPB / numPB),
                 priceToSales: (totalPS / numPS)
-            })
-        } else { setAverage() }
+            },])
+        } else { setAverage([]) }
 
     }
 
@@ -154,10 +154,10 @@ const RelativeTablePage = () => {
                                 }
                             </Stack>
                         </Paper>
-                        <RelativeTable stockData={stockData} averageData={averageData} updateAverageData={updateAverageData} setStockData={setStockData} />
+                        <RelativeTable stockData={stockData} averageData={averageData[0]} updateAverageData={updateAverageData} setStockData={setStockData} />
 
                         {
-                            averageData ? <AverageTable averageData={[averageData]} /> : <></>
+                            averageData ? <AverageTable averageData={averageData} /> : <></>
                         }
                     </Stack>
                 </Grid>
