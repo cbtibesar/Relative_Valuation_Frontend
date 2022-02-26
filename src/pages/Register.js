@@ -1,17 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../services/useAuth.js'
-
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import { Box, Grid, Link, Container, Avatar, Button, TextField, Typography } from '@mui/material';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 
 
 
@@ -34,8 +26,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-
 
 const Register = () => {
   const navigate = useNavigate()
@@ -76,7 +66,6 @@ const Register = () => {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -114,17 +103,19 @@ const Register = () => {
                 onChange={handleChange}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleSubmit}
+              >
+                Sign Up
+              </Button>
+            </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign Up
-          </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">

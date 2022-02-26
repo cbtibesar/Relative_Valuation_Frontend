@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Fade } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid'
-import axiosInstance from "../services/authHeader";
-import { Paper } from "@mui/material";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Typography } from '@mui/material'
+import axiosInstance from "../services/authHeader";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Paper, Fade, Button, Typography } from '@mui/material'
 import {
+    DataGrid,
     GridToolbarContainer,
     GridToolbarExport,
     gridClasses,
 } from '@mui/x-data-grid';
+
+
 const NULL_FIELD_MAGIC_NUMBER = -420.69
 
 const billion = 1000000000
@@ -189,7 +188,7 @@ const RelativeTable =({ stockData, averageData, updateAverageData, setStockData}
                 }
             })
     }
-    
+
     return(
         <React.Fragment>
             {

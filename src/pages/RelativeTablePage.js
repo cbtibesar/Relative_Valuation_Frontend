@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axiosInstance from '../services/authHeader'
-import { Stack, Paper, Button, IconButton, CircularProgress, Dialog } from '@mui/material';
-import { Grid } from '@material-ui/core';
+import { Grid, Stack, Paper, Button, CircularProgress, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add'
-import { Typography } from '@mui/material';
 import DialogueBox from '../components/DialogueBox';
-import { displayData } from '../components/relativeTable'
-
 import AverageTable from '../components/averageTable';
-import IndustryAverageForm from '../components/industryAverageForm';
 import RelativeTable from '../components/relativeTable';
+import { displayData } from '../components/relativeTable'
 
 
 const RelativeTablePage = () => {
@@ -138,7 +134,7 @@ const RelativeTablePage = () => {
     return (
         <div style={{ justifyContent: 'center', display: 'flex', padding: '10px' }}>
             <Grid container spacing={3}>
-                <Grid item xs={10}>
+                <Grid item xs={12}>
                     <Stack spacing={2}>
                         <Paper elevation={4} sx={{ width: '100%', minHeight: '80px' }}>
                             <Stack direction='row'>
@@ -164,10 +160,6 @@ const RelativeTablePage = () => {
                         }
                     </Stack>
                 </Grid>
-                <Grid item xs={2}>
-                    <IndustryAverageForm setAverageData={setAverage} averageData={averageData} />
-                </Grid>
-
             </Grid>
             <DialogueBox open={open} handleClose={handleClose} handleChange={handleChange} label={"Add stock (by ticker):"} onAdd={onAdd} />
 

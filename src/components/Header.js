@@ -1,7 +1,6 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
+import { AppBar, Typography } from '@material-ui/core'
 import ToolBar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@mui/material'
 import { NavLink } from 'react-router-dom'

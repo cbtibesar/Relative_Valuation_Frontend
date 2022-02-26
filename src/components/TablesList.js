@@ -1,12 +1,7 @@
 import React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import { ListItemButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ListItemText from '@mui/material/ListItemText';
-import { Stack,Paper } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
+import { Stack, Paper, List, ListItem, ListItemButton, IconButton, ListItemText } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ListHeader from './ListHeader';
 
 

@@ -1,10 +1,8 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import AddIcon from '@mui/icons-material/Add';
-import { Paper } from '@mui/material';
-import { Typography } from '@mui/material';
-import { Button } from '@mui/material';
+import { Paper, Typography, Button, List, ListItem } from '@mui/material';
+
+
 const ListHeader =({ clickAdd, title })=>{
     return(
         <Paper elevation={4} sx={{ width:'100%'}}>
